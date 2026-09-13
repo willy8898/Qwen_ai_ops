@@ -4,5 +4,13 @@
       "enabled": false
     }
   },
+  "mcpServers": {
+    "config-validator": {
+      "command": "/home/willy8898/miniconda3/envs/qwen-ai-ops/bin/python3",
+      "args": ["optional-advanced-mcp/server.py"],
+      "timeout": 30000,
+      "trust": true
+    }
+  },
   "$version": 4
 }
