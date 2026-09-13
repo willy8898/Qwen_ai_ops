@@ -1,0 +1,72 @@
+service: custom-device-config
+strict: true
+
+rules:
+
+  KeyA:
+    type: string
+    description: "效能監控 API 位址"
+    format: url
+    pattern: '^https?://[a-zA-Z0-9.\-]+\.comp\.com(/.*)?$'
+    used_in_concat: true
+
+  keyB:
+    type: integer
+    description: "重試次數上限"
+    min: 0
+    max: 9999
+
+  keyC:
+    type: list
+    description: "此帳號允許的操作權限清單，逗號分隔"
+    delimiter: ","
+    item:
+      type: string
+      enum: [Read, Write, Update, Delete]
+
+  # KeyD 範例："A10|stop,1,0;A11|read,2,5;A88|process,1,23"
+  # 結構：用 ";" 分隔多筆設備指令；每筆用 "|" 分成 [設備代號, 動作參數]；
+  #       動作參數再用 "," 分成 [動作, 數值1, 數值2]
+  KeyD:
+    type: list
+    description: "設備控制指令清單。每筆格式為「設備代號|動作,數值1,數值2」，多筆用分號分隔"
+    delimiter: ";"
+    item:
+      type: tuple
+      delimiter: "|"
+      fields:
+        - name: device_id
+          type: string
+          pattern: '^[A-Z][0-9]{1,3}$'
+        - name: action_params
+          type: tuple
+          delimiter: ","
+          fields:
+            - name: action
+              type: string
+              enum: [stop, start, read, process]
+            - name: param1
+              type: integer
+              min: 0
+              max: 99
+            - name: param2
+              type: integer
+              min: 0
+              max: 99
+
+  # keyE 範例："serverA,froze;ServerB,start"
+  # 結構：用 ";" 分隔多筆伺服器狀態；每筆用 "," 分成 [伺服器名稱, 狀態]
+  keyE:
+    type: list
+    description: "伺服器狀態清單。每筆格式為「伺服器名稱,狀態」，多筆用分號分隔"
+    delimiter: ";"
+    item:
+      type: tuple
+      delimiter: ","
+      fields:
+        - name: server_name
+          type: string
+          pattern: '^[A-Za-z][A-Za-z0-9]*$'
+        - name: state
+          type: string
+          enum: [start, stop, froze, restart]

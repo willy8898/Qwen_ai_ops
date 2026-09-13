@@ -1,0 +1,8 @@
+{
+  "tools": {
+    "toolSearch": {
+      "enabled": false
+    }
+  },
+  "$version": 4
+}

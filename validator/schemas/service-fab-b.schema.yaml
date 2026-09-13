@@ -1,0 +1,28 @@
+service: service-b
+strict: true
+
+rules:
+
+  env:
+    required: true
+    type: string
+    description: "部署環境"
+    enum: [dev, staging, production]
+
+  allowed_regions:
+    required: true
+    type: list
+    description: "允許部署的區域清單（properties 格式以逗號分隔）"
+    item_enum: [us-east, us-west, ap-southeast]
+
+  feature_flags:
+    required: false
+    type: list
+    description: "啟用的功能旗標清單（properties 格式以逗號分隔）"
+    item_enum: [beta-ui, new-billing, dark-mode]
+
+  max_connections:
+    required: true
+    type: string
+    description: "最大連線數（properties 格式全部視為字串，用 pattern 檢查是否為純數字）"
+    pattern: '^[0-9]+$'
