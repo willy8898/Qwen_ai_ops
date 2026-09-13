@@ -1,6 +1,6 @@
-validator/run_validation.py + validator/agent_validate.py（窄接口包裝腳本）
-optional-advanced-mcp/server.py（MCP 版本，保留但目前用不到）
-QWEN.md 更新（改成強制走包裝腳本）
-.qwen/settings.json 更新（加上 MCP server 設定）
-docs/test_prompt_on_qwen3.md（完整 prompt 測試記錄）
-.gitignore 補上 __pycache__/
+- validator/run_validation.py + validator/agent_validate.py（窄接口包裝腳本）
+- optional-advanced-mcp/server.py（MCP 版本，保留但目前用不到）
+- QWEN.md 更新（改成強制走包裝腳本）
+- .qwen/settings.json 更新（加上 MCP server 設定）
+- docs/test_prompt_on_qwen3.md（完整 prompt 測試記錄）
+- .gitignore 補上 __pycache__/
